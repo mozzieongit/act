@@ -86,9 +86,10 @@ func createRootCommand(ctx context.Context, version string) *cobra.Command {
 	}
 
 	rootCmd.PersistentFlags().BoolP("verbose", "v", false, "verbose output")
-	rootCmd.PersistentFlags().StringVarP(&input.artifactServerPath, "artifact-server-path", "", "", "Defines the path where the artifact server stores uploads and retrieves downloads from. If not specified the artifact server will not start.")
-	rootCmd.PersistentFlags().StringVarP(&input.artifactServerAddr, "artifact-server-addr", "", common.GetOutboundIP().String(), "Defines the address to which the artifact server binds.")
-	rootCmd.PersistentFlags().StringVarP(&input.artifactServerPort, "artifact-server-port", "", "34567", "Defines the port where the artifact server listens.")
+	rootCmd.PersistentFlags().StringVarP(&input.artifactServerPath, "artifact-server-path", "d", "", "Defines the path where the artifact server stores uploads and retrieves downloads from. If not specified the artifact server will not start.")
+	rootCmd.PersistentFlags().StringVarP(&input.artifactServerAddr, "artifact-server-addr", "a", common.GetOutboundIP().String(), "Defines the address to which the artifact server binds.")
+	rootCmd.PersistentFlags().StringVarP(&input.artifactServerPort, "artifact-server-port", "p", "34567", "Defines the port where the artifact server listens.")
+	rootCmd.MarkPersistentFlagRequired("artifact-server-path")
 	// rootCmd.PersistentFlags().BoolVarP(&input.noCacheServer, "no-cache-server", "", false, "Disable cache server")
 	// rootCmd.PersistentFlags().StringVarP(&input.cacheServerPath, "cache-server-path", "", filepath.Join(cmd.CacheHomeDir, "actcache"), "Defines the path where the cache server stores caches.")
 	// rootCmd.PersistentFlags().StringVarP(&input.cacheServerExternalURL, "cache-server-external-url", "", "", "Defines the external URL for if the cache server is behind a proxy. e.g.: https://act-cache-server.example.com. Be careful that there is no trailing slash.")

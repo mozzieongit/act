@@ -19,6 +19,8 @@ podman run --network podman \
   /standalone-artifact-server --artifact-server-path /artifacts
 ```
 
+Instead of typing `--artifact-server-path` you can also use the short flag `-d` (for directory).
+
 When running the artifact server, it prints the necessary environment variables
 to pass to act to access the artifact server. You can either pass them via the `--env` option or by creating an
 environment file and using the `--env-file` option, e.g.:
