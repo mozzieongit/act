@@ -1,4 +1,6 @@
-# Forked from https://github.com/nektos/act until proper PR
+# Standalone artifact server based on existing act code
+
+_Forked from https://github.com/nektos/act until creating a proper PR_
 
 This provides the integrated artifact server as a standalone binary for use in
 a container for example.
