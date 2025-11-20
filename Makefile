@@ -116,3 +116,7 @@ snapshot:
 upgrade:
 	go get -u
 	go mod tidy
+
+.PHONY: standalone
+standalone:
+	go build -ldflags "-X main.version=$(VERSION)" -o dist/local/standalone-artifact-server ./bin/standalone-artifact-server.go
