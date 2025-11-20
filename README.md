@@ -1,3 +1,46 @@
+# Forked from https://github.com/nektos/act until proper PR
+
+This provides the integrated artifact server as a standalone binary for use in
+a container for example.
+
+This enables the use of act's `--network` option while still providing support
+for artifact uploads by creating a container running this standalone artifact
+server.
+
+```
+make standalone
+mkdir /tmp/act-artifacts
+podman run --network podman \
+  -v /tmp/act-artifacts:/artifacts \
+  -v ./dist/local/standalone-artifact-server:/standalone-artifact-server \
+  --rm \
+  -ti \
+  docker.io/ubuntu:latest \
+  /standalone-artifact-server --artifact-server-path /artifacts
+```
+
+When running the artifact server, it prints the necessary environment variables
+to pass to act to access the artifact server. You can either pass them via the `--env` option or by creating an
+environment file and using the `--env-file` option, e.g.:
+
+```
+act \
+  --network podman \
+  --env ACTIONS_RUNTIME_URL=http://192.168.178.138:34567/ \
+  --env ACTIONS_RESULTS_URL=http://192.168.178.138:34567/ \
+  --env ACTIONS_RUNTIME_TOKEN=<a-JWT...> \
+  -W .github/workflows/system-tests.yml
+# OR
+# create act.env
+act \
+  --env-file act.env \
+  --network podman \
+  -W .github/workflows/system-tests.yml
+```
+
+---
+Original README...
+
 ![act-logo](https://raw.githubusercontent.com/wiki/nektos/act/img/logo-150.png)
 
 # Overview [![push](https://github.com/nektos/act/workflows/push/badge.svg?branch=master&event=push)](https://github.com/nektos/act/actions) [![Go Report Card](https://goreportcard.com/badge/github.com/nektos/act)](https://goreportcard.com/report/github.com/nektos/act) [![awesome-runners](https://img.shields.io/badge/listed%20on-awesome--runners-blue.svg)](https://github.com/jonico/awesome-runners)
