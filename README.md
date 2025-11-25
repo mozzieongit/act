@@ -9,6 +9,8 @@ This enables the use of act's `--network` option while still providing support
 for artifact uploads by creating a container running this standalone artifact
 server.
 
+Instead of `podman run --network podman ...` you can also use `docker run --network default ...`.
+
 ```
 make standalone
 mkdir /tmp/act-artifacts
